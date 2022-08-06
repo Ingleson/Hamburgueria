@@ -1,13 +1,13 @@
 import { AllValue } from "./style";
 
-function ValueTotal({totalValue, deleteCard}) {
+function ValueTotal({totalValue, deleteAll}) {
   return(
     <AllValue>
       <div>
         <p>Total</p>
-        <span>R$ {totalValue}</span>
+        <span>R$ {totalValue.toFixed(2)}</span>
       </div>
-      <button onClick={deleteCard}>Remover todos</button>
+      <button onClick={deleteAll}>Remover todos</button>
     </AllValue>
   )
 }

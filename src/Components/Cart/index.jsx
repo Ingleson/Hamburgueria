@@ -1,7 +1,7 @@
 import ValueTotal from "../ValueTotal";
 import { ContainerCart, VoidCart } from "./style";
 
-function Cart({productsOnCart, totalValue, deleteCard}) {
+function Cart({productsOnCart, totalValue, deleteCard, deleteAll}) {
 
   return(
     <ContainerCart productsOnCart={productsOnCart}>
@@ -30,7 +30,7 @@ function Cart({productsOnCart, totalValue, deleteCard}) {
         }
         
       </ul>
-      {productsOnCart.length > 0 && <ValueTotal totalValue={totalValue} deleteCard={deleteCard}/>}
+      {productsOnCart.length > 0 && <ValueTotal totalValue={totalValue} deleteAll={deleteAll}/>}
     </ContainerCart>
   )
 

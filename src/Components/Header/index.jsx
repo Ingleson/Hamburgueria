@@ -1,6 +1,6 @@
 import {HeadPage} from './style.js'
 
-function Header({filterInput, setFilterInput}) {
+function Header({filterProd}) {
   return(
     <HeadPage>
       <div className='base'>
@@ -11,10 +11,9 @@ function Header({filterInput, setFilterInput}) {
         <form className='search'>
           <input type="text" 
           placeholder='Digitar Pesquisa'
-          value={filterInput}
-          onChange={event => setFilterInput(event.target.value)}
+          onChange={event => filterProd(event.target.value.trim())}
           />
-          <button type='submit'>Pesquisar</button>
+          <button type='submit' onClick={(e) => e.preventDefault()}>Pesquisar</button>
         </form>
       </div>
 

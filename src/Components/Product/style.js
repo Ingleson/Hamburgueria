@@ -18,7 +18,7 @@ export const ContainerProduct = styled.ul`
     flex-wrap: nowrap;
     align-items: center;
   
-    width: 700px;
+    width: 120%;
     height: 400px;
 
     margin-left: 0;

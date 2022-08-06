@@ -1,10 +1,10 @@
 import { CardProduct, ContainerProduct } from "./style.js";
 
-function Product({products, addCart}) {
+function Product({productsFiltered, addCart}) {
 
   return(
     <ContainerProduct>
-      {products.map(({id, img, name, category, price}) => (
+      {productsFiltered.map(({id, img, name, category, price}) => (
         <CardProduct key={id} >
           <figure>
             <img src={img} alt="img-product" />

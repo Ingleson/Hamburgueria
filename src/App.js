@@ -6,13 +6,13 @@ import Product from './Components/Product/index';
 import './app.css'
 
 import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 function App() {
 
   const [products, setProducts] = useState([]);
   const [productsOnCart, setProductsOnCart] = useState([]);
-  const [filterInput, setFilterInput] = useState('');
+  const [productsFiltered, setProductsFiltered] = useState([]);
   
   function addCart( idCart ) {
     const forCart = products.find(({id}) => idCart === id);
@@ -27,35 +27,38 @@ function App() {
     setProductsOnCart(remaining);
     toast.success('Produto removido!')
   }
+  function deleteAll() {
+    const voidCart = productsOnCart.filter(({name}) => 'é diferent sim carai' === name);
+    setProductsOnCart(voidCart);
+    toast.success('Carrinho esvaziado!')
+  }
+  function filterProd(inputValue) {
+    
+    const arrayFilter = products.filter(({name}) => name.toLowerCase().includes(inputValue.toLowerCase()));
+    
+    arrayFilter.length > 0 ? setProductsFiltered(arrayFilter) : setProductsFiltered(products);
+  }
+  
 
   useEffect(() => { 
     fetch(`https://hamburgueria-kenzie-json-serve.herokuapp.com/products`)
     .then(response => response.json())
-    .then(response => setProducts(response))
+    .then(response => {
+      setProducts(response);
+      setProductsFiltered(response);
+    })
     .catch(error => console.log(error));
-  }, [products])
+  }, [])
 
   const totalValue = productsOnCart.reduce((acc, {price}) => acc + price, 0)
 
   return (
     
     <div className="App">
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        />
-      <ToastContainer />
-      <Header filterInput={filterInput} setFilterInput={setFilterInput}/>
+      <Header filterProd={filterProd}  />
       <Main>
-        <Product products={products} addCart={addCart} />
-        <Cart productsOnCart={productsOnCart} totalValue={totalValue} deleteCard={deleteCard} />
+        <Product productsFiltered={productsFiltered} addCart={addCart} />
+        <Cart productsOnCart={productsOnCart} totalValue={totalValue} deleteCard={deleteCard} deleteAll={deleteAll} />
       </Main>
       
     </div>
